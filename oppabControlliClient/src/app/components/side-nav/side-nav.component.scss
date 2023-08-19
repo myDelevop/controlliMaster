@@ -1,0 +1,60 @@
+.sidenav-container {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .mat-nav-list {
+    padding-top: 0px;
+/*    a.active {
+      background: #3f51b5;
+      font-weight: bold;
+      color:#fff;
+    }*/
+
+    div > div > div > a {
+      & span {
+        padding-left: 12px;
+      }
+    }
+  }
+
+  .group-menu-selected {
+    background: #e6e6e6;
+  }
+
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: #3f51b5;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.line {
+  border-bottom: 0.1px solid #e0e0e0;
+}
+
+.mat-list-item {
+  span {
+    white-space: nowrap;
+  }
+}
+
+.icon {
+  padding: 0 14px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

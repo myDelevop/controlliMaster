@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.1.6.RELEASE</version>
+      <relativePath />
+      <!-- lookup parent from repository -->
+   </parent>
+   <groupId>it.bz.prov.controlli</groupId>
+   <artifactId>controlli_endpoint</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <packaging>war</packaging>
+   <name>Controlli - Endpoint</name>
+   <description>gateway</description>
+   <properties>
+      <java.version>1.8</java.version>
+      <angular.project.location>../oppabControlliClient</angular.project.location>
+      <angular.project.nodeinstallation>../oppabControlliClient/node_installation</angular.project.nodeinstallation>
+   </properties>
+   <profiles>
+      <profile>
+         <id>buildWarWithClient</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>3.8.0</version>
+                  <configuration>
+                     <source>1.8</source>
+                     <target>1.8</target>
+                  </configuration>
+               </plugin>
+               <plugin>
+                  <groupId>com.github.eirslett</groupId>
+                  <artifactId>frontend-maven-plugin</artifactId>
+                  <version>1.0</version>
+                  <configuration>
+                     <workingDirectory>${angular.project.location}</workingDirectory>
+                     <installDirectory>${angular.project.nodeinstallation}</installDirectory>
+                  </configuration>
+                  <executions>
+                     <!-- It will install nodejs and npm -->
+                     <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                           <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                           <nodeVersion>v10.16.0</nodeVersion>
+                           <npmVersion>6.9.0</npmVersion>
+                        </configuration>
+                     </execution>
+                     <!-- It will execute command "npm install" inside "/e2e-angular2" directory -->
+                     <execution>
+                        <id>npm install</id>
+                        <goals>
+                           <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                           <arguments>install</arguments>
+                        </configuration>
+                     </execution>
+                     <!-- It will execute command "npm build" inside "/e2e-angular2" directory 
+	                    to clean and create "/dist" directory -->
+                     <execution>
+                        <id>npm build</id>
+                        <goals>
+                           <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                           <arguments>run build</arguments>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+               <!-- Plugin to copy the content of /angular/dist/ directory to output 
+	            directory (ie/ /target/transactionManager-1.0/) -->
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-resources-plugin</artifactId>
+                  <version>2.4.2</version>
+                  <executions>
+                     <execution>
+                        <id>default-copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                           <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                           <overwrite>true</overwrite>
+                           <!-- This folder is the folder where your angular files 
+	                        will be copied to. It must match the resulting war-file name.
+	                        So if you have customized the name of war-file for ex. as "app.war"
+	                        then below value should be ${project.build.directory}/app/ 
+	                        Value given below is as per default war-file name -->
+                           <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/client</outputDirectory>
+                           <resources>
+                              <resource>
+                                 <directory>${project.basedir}/${angular.project.location}/dist/OPPABClient2/</directory>
+                              </resource>
+                           </resources>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>it.bz.prov.controlli</groupId>
+         <artifactId>controlli_services</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-config</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-ldap</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.jsonwebtoken</groupId>
+         <artifactId>jjwt</artifactId>
+         <version>0.9.1</version>
+      </dependency>
+   </dependencies>
+</project>

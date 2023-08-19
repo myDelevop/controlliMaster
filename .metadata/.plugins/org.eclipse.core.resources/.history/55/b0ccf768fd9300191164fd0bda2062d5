@@ -1,0 +1,36 @@
+package it.bz.prov.controlli.bo;
+
+import java.io.Serializable;
+
+
+public class AziendaBO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private String cuaa;
+	private String descrizione;
+
+	public AziendaBean() {}
+	
+	public AziendaBean(String cuaa, String descrizione) {
+		super();
+		this.cuaa = cuaa;
+		this.descrizione = descrizione;
+	}
+
+	public String getCuaa() {
+		return cuaa;
+	}
+
+	public void setCuaa(String cuaa) {
+		this.cuaa = cuaa;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+}

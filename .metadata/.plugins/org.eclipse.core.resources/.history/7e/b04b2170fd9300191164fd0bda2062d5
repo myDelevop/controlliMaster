@@ -1,0 +1,38 @@
+package it.bz.prov.controlli.bo;
+
+import java.io.Serializable;
+
+public class DomandaBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
+	private long domandaId;
+	private String descrizione;
+	
+	
+	public DomandaBean() {}
+	
+	public DomandaBean(long domandaId, String descrizione) {
+		super();
+		this.domandaId = domandaId;
+		this.descrizione = descrizione;
+	}
+	
+	public long getDomandaId() {
+		return domandaId;
+	}
+	
+	public void setDomandaId(long domandaId) {
+		this.domandaId = domandaId;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	
+}

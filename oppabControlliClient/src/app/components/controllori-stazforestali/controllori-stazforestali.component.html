@@ -1,0 +1,63 @@
+<!-- <div class="mat-elevation-z24" style="margin: 50px;">-->
+
+  <div class="filter">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput (keyup)="applyFilter($event.target.value)" #filter placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="controllore">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Controllore </th>
+      <td mat-cell *matCellDef="let element"> {{ element.controllore.nome }} {{ element.controllore.cognome }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descrizioneStazioneForestaleIt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Stazione Forestale ITA </th>
+      <td mat-cell *matCellDef="let element"> {{ element.stazioneForestale.descrIT }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descrizioneStazioneForestaleDe">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Stazione Forestale DEU </th>
+      <td mat-cell *matCellDef="let element"> {{ element.stazioneForestale.descrDE }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="annoValiditaInizio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Anno Inizio Validita </th>
+      <td mat-cell *matCellDef="let element"> {{ element.annoValiditaInizio }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="annoValiditaFine">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Anno Fine Validita </th>
+      <td mat-cell *matCellDef="let element"> {{ element.annoValiditaFine }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="note">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Note </th>
+      <td mat-cell *matCellDef="let element"> {{ element.note }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <th class="add-item-th" mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addControlloreStazioneForestale()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="updateControlloreStazioneForestale(row)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="deleteControlloreStazioneForestale(row)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+
+<!--</div>-->

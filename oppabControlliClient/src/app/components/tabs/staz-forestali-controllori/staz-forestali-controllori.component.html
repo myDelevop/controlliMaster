@@ -1,0 +1,7 @@
+<mat-tab-group (selectedTabChange)='csf.getControlloriStazForestali()'>
+    <mat-tab label="Controllori"> <app-controllori></app-controllori> </mat-tab>
+    <mat-tab label="Stazioni Forestali"> <app-stazione-forestale></app-stazione-forestale> </mat-tab>
+    <mat-tab label="Controllori - Staz. Forestali"> 
+        <app-controllori-stazforestali #csf></app-controllori-stazforestali>
+    </mat-tab>
+</mat-tab-group>

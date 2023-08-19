@@ -1,0 +1,21 @@
+package it.bz.prov.controlli.todelete;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.bz.prov.controlli.iservices.AziendaService;
+
+@RestController
+public class Todelete {
+	@Autowired
+	public AziendaService aziService;
+	
+	@GetMapping("/example")
+	public String example() {
+		System.out.println("OK");
+		System.out.println("OK");
+		return "OK";
+	}
+
+}

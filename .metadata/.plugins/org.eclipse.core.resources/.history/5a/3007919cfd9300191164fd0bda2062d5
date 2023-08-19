@@ -1,0 +1,44 @@
+package it.bz.prov.controlli.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import it.bz.prov.controlli.bo.AziendaBO;
+import it.bz.prov.controlli.entities.Azienda;
+import it.bz.prov.controlli.iservices.AziendaService;
+import it.bz.prov.controlli.repositories.AziendaRepository;
+
+@Service
+public class AziendaServiceImpl implements AziendaService {
+	
+	@Autowired
+	AziendaRepository aziendaRepo;
+	
+	public void deleteAzienda(AziendaBO azienda) {
+		Azienda aziendaEntity = convertToEntity(azienda);
+		aziendaRepo.delete(aziendaEntity);
+	}
+	
+	public void insertAzienda(AziendaBO azienda) {
+		Azienda aziendaEntity = convertToEntity(azienda);
+		aziendaRepo.save(aziendaEntity);
+	}
+	
+	private Azienda convertToEntity(AziendaBO azienda) {
+		Azienda aziendaEntity = new Azienda();
+		
+		aziendaEntity.setCuaa(azienda.getCuaa());
+		aziendaEntity.setDescrizione(azienda.getDescrizione());
+
+		return aziendaEntity;
+	}
+	
+//	private AziendaBO convertToBO(Azienda azienda) {
+//		AziendaBO aziendaBO = new AziendaBO();
+//		
+//		aziendaBO.setCuaa(azienda.getCuaa());
+//		aziendaBO.setDescrizione(azienda.getDescrizione());
+//		
+//		return aziendaBO;
+//	}
+}

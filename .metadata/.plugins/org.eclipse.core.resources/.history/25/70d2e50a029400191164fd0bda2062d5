@@ -1,0 +1,2 @@
+spring.mvc.serlvet.path = /
+spring.main.banner-mode = off

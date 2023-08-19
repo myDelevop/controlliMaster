@@ -1,0 +1,12 @@
+<mat-tab-group (selectedTabChange)='csf.getControlloriStazForestali(); aug.getUtentiGruppi();'>
+    <mat-tab label="Utenti"> <app-utenti></app-utenti> </mat-tab>
+    <mat-tab label="Gruppi"> <app-gruppi></app-gruppi> </mat-tab>
+    <mat-tab label="Utenti - Gruppi">       
+        <app-utente-gruppo #aug></app-utente-gruppo>
+    </mat-tab>
+    <mat-tab label="Controllori"> <app-controllori></app-controllori> </mat-tab>
+    <mat-tab label="Stazioni Forestali"> <app-stazione-forestale></app-stazione-forestale> </mat-tab>
+    <mat-tab label="Controllori - Staz. Forestali"> 
+        <app-controllori-stazforestali #csf></app-controllori-stazforestali>
+    </mat-tab>
+</mat-tab-group>

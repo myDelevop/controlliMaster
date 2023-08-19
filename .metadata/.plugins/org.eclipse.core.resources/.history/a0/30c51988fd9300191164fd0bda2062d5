@@ -1,0 +1,20 @@
+package it.bz.prov.controlli.repositories;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import it.bz.prov.controlli.entity.Azienda;
+
+@Repository
+public interface AziendaRepository extends CrudRepository<Azienda, Serializable> {
+	public List<Azienda> findAll();
+	public void delete(Azienda azienda);
+	public void deleteById(Serializable id);
+	
+	@SuppressWarnings("unchecked")
+	public Azienda save(Azienda azienda);
+	
+}

@@ -1,0 +1,34 @@
+<div class="container">
+    <h3 mat-dialog-title>Modifica gruppo</h3>
+
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input matInput #input class="form-control" [(ngModel)]="data.nome" placeholder="Nome" name="nome" required>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <textarea matInput #input class="form-control" [(ngModel)]="data.descrizioneIT" placeholder="Descrizione ITA" name="descrizioneIT" required></textarea>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <textarea matInput #input class="form-control" [(ngModel)]="data.descrizioneDE" placeholder="Descrizione DEU" name="descrizioneDE"></textarea>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmEdit()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+  </div>

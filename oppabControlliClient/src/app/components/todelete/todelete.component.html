@@ -1,0 +1,76 @@
+<div class="container mat-elevation-z24" style="margin: 50px;">
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm" fxLayout="row" fxLayoutAlign="space-evenly start">
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+
+      <div class="form">
+        <mat-form-field color="accent" fxFlex>
+          <mat-label>Stazione Forestale di partenza</mat-label>
+          <mat-select [(ngModel)]="defaultValue" matInput #input class="form-control"
+                          name="stazioneForestale" >
+            <mat-option (onSelectionChange)="updateDynamicCuaaLeft($event)"
+                            *ngFor="let stazioneForestale of stazioniForestali"
+                            [value]="stazioneForestale"
+                            [disabled]="disabled">
+                            {{stazioneForestale.descrIT}}</mat-option>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <br>
+
+      <p>
+        <input type="text" placeholder="search..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
+      </p>
+      <div class="example-container">
+        <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="azStazForFilteredLeft" [cdkDropListConnectedTo]="[todoList]"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let asf of azStazForFilteredLeft | filter :'azienda' : 'denominazione' : searchValue"
+              cdkDrag>
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>{{asf.azienda.denominazione}}</mat-card-title>
+                    <mat-card-subtitle>{{asf.azienda.cuaa}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>
+                      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                      bred for hunting.
+                    </p>
+                  </mat-card-content>
+                </mat-card>
+                
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+      <div class="form">
+        <mat-form-field color="accent" fxFlex>
+          <mat-label>Stazione Forestale sorgente</mat-label>
+          <mat-select matInput #input class="form-control"
+                      name="stazioneForestale">
+            <mat-option *ngFor="let stazioneForestale of stazioniForestali" [value]="stazioneForestale"
+                         (onSelectionChange)="updateDynamicCuaaRight($event)">
+                          {{stazioneForestale.descrIT}}
+            </mat-option>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <br>
+      <div class="example-container">
+        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="azStazForFilteredRight" [cdkDropListConnectedTo]="[doneList]"
+                class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let asf of azStazForFilteredRight" cdkDrag>{{asf.azienda.cuaa}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <h3 mat-dialog-title>Nuovo Utente Gruppo</h3>
+
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selectedUser" matInput #input class="form-control" placeholder="Utente" name="utente" required>
+            <mat-option (onSelectionChange)="updateGroupList($event)"  placeholder="Nome Utente"
+               required *ngFor="let user of users" [value]="user"> {{user.nome + '&nbsp;' + user.cognome}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selectedGroup" matInput #input class="form-control" placeholder="Gruppo" name="gruppo" required>
+            <mat-option  placeholder="Nome Gruppo"
+               required *ngFor="let group of filteredGroups" [value]="group"> {{group.nome}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+
+  </div>

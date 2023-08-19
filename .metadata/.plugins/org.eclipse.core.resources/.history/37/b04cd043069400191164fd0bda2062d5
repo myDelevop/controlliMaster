@@ -1,0 +1,27 @@
+package it.bz.prov.controlli.todelete;
+
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.bz.prov.controlli.bo.AziendaBO;
+import it.bz.prov.controlli.iservices.AziendaService;
+
+@RestController
+public class Todelete {
+	@Autowired
+	public AziendaService aziService;
+	
+	private Logger logger = Logger.getLogger("class");
+	
+	@GetMapping("/example")
+	public String example() {
+		logger.info("OK 1");
+		aziService.insertAzienda(new AziendaBO("012344444", "21/06/2019"));
+		logger.info("OK 2");
+		return "OK";
+	}
+
+}

@@ -1,0 +1,39 @@
+<body>
+  <div class="mat-elevation-z18" style="margin: 50px;">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup] = "loginForm" (ngSubmit)="onSubmit()" id="loginForm">
+        <table class="login-card-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="Username" formControlName="username" class="form-control" name="username" required>
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username obbligatoria</div>
+                </div>  
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <mat-form-field>
+                    <input matInput placeholder="Password" formControlName="password" class="form-control" type="password" name="password" required>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password obbligatoria</div>
+                    </div>
+                </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="onSubmit()" mat-raised-button [disabled]="loading" color="primary" form="loginForm">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>  
+</body>

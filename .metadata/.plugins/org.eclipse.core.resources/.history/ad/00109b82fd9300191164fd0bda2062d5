@@ -1,0 +1,8 @@
+package it.bz.prov.controlli.iservices;
+
+import it.bz.prov.controlli.bean.AziendaBO;
+
+public interface AziendaService {	
+	public abstract void deleteAzienda(AziendaBO azienda);
+	public abstract void insertAzienda(AziendaBO azienda);
+}

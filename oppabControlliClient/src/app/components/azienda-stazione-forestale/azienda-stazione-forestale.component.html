@@ -1,0 +1,65 @@
+<!-- <div class="mat-elevation-z24" style="margin: 50px;">-->
+
+    <div class="filter">
+        <mat-form-field floatPlaceholder="never" color="accent">
+          <input matInput (keyup)="applyFilter($event.target.value)" #filter placeholder="Filter">
+        </mat-form-field>
+      </div>
+    
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="stazioneForestale">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Stazione Forestale </th>
+          <td mat-cell *matCellDef="let element"> 
+            {{ element.stazioneForestale.numero }} - {{ element.stazioneForestale.nome }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="cuaa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CUAA </th>
+          <td mat-cell *matCellDef="let element"> {{ element.azienda.cuaa }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="ragioneSociale">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ragione Sociale </th>
+          <td mat-cell *matCellDef="let element"> {{ element.azienda.ragioneSociale }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="localita">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Localita </th>
+          <td mat-cell *matCellDef="let element"> {{ element.azienda.localita }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="campagna">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Campagna </th>
+          <td mat-cell *matCellDef="let element"> {{ element.campagna }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="note">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Note </th>
+          <td mat-cell *matCellDef="let element"> {{ element.note }} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="actions">
+          <th class="add-item-th" mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button color="primary" (click)="addAziendaStazioneForestale()">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="updateAziendaStazioneForestale(row)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="deleteAziendaStazioneForestale(row)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+    
+    <!--</div>-->
+    

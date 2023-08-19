@@ -1,0 +1,4 @@
+<div *ngIf="isLoggedIn(); then loggedTemplate else loginTemplate"></div>
+
+<ng-template #loginTemplate> <app-login></app-login></ng-template>
+<ng-template #loggedTemplate> <app-side-nav></app-side-nav> </ng-template>

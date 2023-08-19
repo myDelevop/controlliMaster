@@ -1,0 +1,26 @@
+package it.bz.prov.controlli.todelete;
+
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.bz.prov.controlli.iservices.AziendaService;
+
+@RestController
+public class Todelete {
+	@Autowired
+	public AziendaService aziService;
+	
+	private Logger logger = Logger.getLogger(Todelete.class);
+	@GetMapping("/example")
+	public String example() {
+		System.out.println("OK 1");
+		
+		aziService.
+		System.out.println("OK 2");
+		return "OK";
+	}
+
+}

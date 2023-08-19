@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'dialog'"
+      [mode]="(isHandset$ | async) ? 'over' : 'over'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar (click)="drawer.toggle()" color="primary">Menu</mat-toolbar>
+
+      <mat-nav-list>
+        <div *ngFor="let menuGroup of menuList">
+          <div *ngIf="menuGroup.menus.length == 0">
+            <a mat-list-item class="line" routerLinkActive="active" [routerLink]="[menuGroup.group.code]">
+              <span>{{ menuGroup.group.name  }}</span>
+            </a>
+          </div>
+          <div *ngIf="menuGroup.menus.length > 0" [ngClass]="{'group-menu-selected': menuGroupSelected==menuGroup.group.code}">
+            <a mat-list-item class="line" (click)="selectMenu(menuGroup.group)">
+              <mat-icon>{{menuGroupSelected==menuGroup.group.code? 'keyboard_arrow_down': 'keyboard_arrow_right'}}</mat-icon>
+              <span>{{ menuGroup.group.name }}</span>
+            </a>
+            <div *ngIf="menuGroupSelected==menuGroup.group.code">
+              <a (click)="drawer.toggle()" *ngFor="let menu of menuGroup.menus" mat-list-item class="line" routerLinkActive="active" [routerLink]="[menu.code]">
+                <span>{{ menu.name }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span style="padding-left: 32px">OPPAB Controlli Digitali</span>
+
+      <span class="spacer"></span>
+
+      <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="icon" aria-hidden="false" aria-label="Example user verified icon">person</mat-icon>
+          <span>{{ getObjToken().nome }}</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div style="padding: 13px">
+          <b>{{ getObjToken().nome }} {{ getObjToken().cognome }}</b> 
+          <br> ({{ getObjToken().username }})
+        </div>
+
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      
+      </mat-menu>
+
+
+      
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

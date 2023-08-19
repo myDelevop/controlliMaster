@@ -1,0 +1,57 @@
+<div class="container">
+  <h3 mat-dialog-title>Nuovo Controllore Stazione-Forestale</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+    
+    <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selectedStazioneForestale" matInput #input class="form-control" placeholder="Stazione Forestale" name="stazioneForestale" required>
+            <mat-option (onSelectionChange)="updateAziendeList($event)" placeholder="Nome Stazione Forestale"
+              required *ngFor="let stazioneForestale of stazioniForestali" [value]="stazioneForestale"> 
+              {{stazioneForestale.numero}} - {{stazioneForestale.nome}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selectedAzienda" matInput #input class="form-control" placeholder="Azienda" name="azienda" required>
+            <mat-option  placeholder="Nome Azienda"
+              required *ngFor="let azienda of filteredAziende" [value]="azienda"> {{azienda.cuaa}} - {{azienda.ragioneSociale}} 
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <input style="display: none" [matDatepicker]="dpCampagna">
+          <input matInput #input class="form-control" [(ngModel)]="data.campagna" placeholder="Campaga" name="campagna" readonly>
+          <mat-datepicker #dpCampagna startView="multi-year" (yearSelected)="setCampagna($event, dpCampagna)">
+          </mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="dpCampagna"></mat-datepicker-toggle>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <textarea #message maxlength="400" matInput #input class="form-control" placeholder="Note" [(ngModel)]="data.note" name="note"></textarea>
+          <mat-hint >{{message.value.length}} / 400 </mat-hint>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+          (click)="confirmAdd()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+  </form>
+
+</div>

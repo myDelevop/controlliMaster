@@ -1,0 +1,104 @@
+<div class="container">
+  <h3 mat-dialog-title>Modifica utente</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input style="display: none" [matDatepicker]="dpAnno">
+        <input matInput #input class="form-control" [(ngModel)]="data.anno" placeholder="Anno" name="anno" readonly>
+        <mat-datepicker #dpAnno startView="multi-year" (yearSelected)="setAnno($event, dpAnno)"></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="dpAnno"></mat-datepicker-toggle>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input style="display: none" [matDatepicker]="dpCampagna">
+        <input matInput #input class="form-control" [(ngModel)]="data.campagna" placeholder="Campagna" name="campagna" readonly required>
+        <mat-datepicker #dpCampagna startView="multi-year" (yearSelected)="setCampagna($event, dpCampagna)"> </mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="dpCampagna"></mat-datepicker-toggle>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedMisura" matInput #input class="form-control" placeholder="Misura" name="misura" required>
+          <mat-option (onSelectionChange)="updateInterventoList($event)" placeholder="Misura"
+            *ngFor="let misura of misure" [value]="misura"> {{misura}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedIntervento" matInput #input class="form-control" placeholder="Intervento" name="intervento" required>
+          <mat-option (onSelectionChange)="updateSottoInterventoList($event)" placeholder="Intervento"
+            *ngFor="let intervento of interventi" [value]="intervento"> {{intervento}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedSottoIntervento" matInput #input class="form-control" placeholder="Sotto Intervento" name="sottoIntervento" required> 
+          <mat-option placeholder="Sotto Intervento" required *ngFor="let sottoIntervento of sottoInterventi"
+            [value]="sottoIntervento"> {{sottoIntervento}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedTipoCampione" matInput #input class="form-control" placeholder="Tipo Campione"
+          name="tipoCampione">
+          <mat-option placeholder="Tipo Campione" required *ngFor="let tipoCampione of tipiCampione"
+            [value]="tipoCampione"> {{tipoCampione}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedTipoControllo" matInput #input class="form-control" placeholder="Tipo Controllo"
+          name="tipoControllo">
+          <mat-option placeholder="Tipo Controllo" required *ngFor="let tipoControllo of tipoControlli"
+            [value]="tipoControllo"> {{tipoControllo}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-select [(value)]="selectedChecklistTemplate" matInput #input class="form-control"
+          placeholder="Checklist Template" name="checklistTemplate" required>
+          <mat-option placeholder="Checklist Template" required *ngFor="let checklistTemplate of checklistTemplates"
+            [value]="checklistTemplate"> {{checklistTemplate}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmEdit()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

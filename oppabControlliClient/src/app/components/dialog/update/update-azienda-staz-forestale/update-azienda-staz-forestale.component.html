@@ -1,0 +1,51 @@
+<div class="container">
+    <h3 mat-dialog-title>Modifica controllore - Stazione forestale</h3>
+
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selected" matInput #input class="form-control" name="stazioneForestale" disabled>
+            <mat-option value="X"> {{data.stazioneForestale.numero + '&nbsp;' + data.stazioneForestale.nome}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+        <mat-form-field color="accent">
+          <mat-select [(value)]="selected" matInput #input class="form-control" name="azienda" disabled>
+            <mat-option  value="X"> {{data.azienda.cuaa + '&nbsp;' + data.azienda.ragioneSociale}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="form">
+          <mat-form-field color="accent">
+            <input style="display: none" [matDatepicker]="dpCampagna">
+            <input matInput #input class="form-control" [(ngModel)]="data.campagna" placeholder="Campaga" name="campagna" readonly>
+            <mat-datepicker #dpCampagna startView="multi-year" (yearSelected)="setCampagna($event, dpCampagna)">
+            </mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="dpCampagna"></mat-datepicker-toggle>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+  
+  
+        <div class="form">
+          <mat-form-field color="accent">
+            <textarea #message maxlength="400" matInput #input class="form-control" placeholder="Note" [(ngModel)]="data.note" name="note"></textarea>
+            <mat-hint >{{message.value.length}} / 400 </mat-hint>
+            <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+    
+
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmEdit()">Save</button>
+        <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,53 @@
+<div class="container">
+  <h3 mat-dialog-title>Nuova Anagrafica</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" [(ngModel)]="data.chiave" placeholder="Chiave" name="chiave" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" [(ngModel)]="data.valoreIT" placeholder="Valore ITA" name="valoreIT" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" [(ngModel)]="data.valoreDE" placeholder="Valore DEU" name="valoreDE">
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+        <mat-form-field color="accent">
+        <input style="display: none" [matDatepicker]="dpAnnoInizio">
+        <input matInput #input class="form-control" [(ngModel)]="data.annoValiditaInizio" placeholder="Anno Validita inizio" name="annoValiditaInizio" readonly>
+        <mat-datepicker #dpAnnoInizio startView="multi-year" (yearSelected)="setAnnoValiditaInizio($event, dpAnnoInizio)">
+        </mat-datepicker><mat-datepicker-toggle matSuffix [for]="dpAnnoInizio"></mat-datepicker-toggle>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div class="form">
+        <mat-form-field color="accent">
+        <input style="display: none" [matDatepicker]="dpAnnoFine">
+        <input matInput #input class="form-control" [(ngModel)]="data.annoValiditaFine" placeholder="Anno Validita Fine" name="annoValiditaFine" readonly>
+        <mat-datepicker #dpAnnoFine startView="multi-year" (yearSelected)="setAnnoValiditaFine($event, dpAnnoFine)">
+        </mat-datepicker><mat-datepicker-toggle matSuffix [for]="dpAnnoFine"></mat-datepicker-toggle>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmAdd()">Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </form>
+</div>

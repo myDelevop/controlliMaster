@@ -1,0 +1,45 @@
+<div class="container">
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div fxLayout="row" fxLayoutAlign="space-evenly none" >
+      <div class="form">
+        <mat-form-field color="accent" fxFlex>
+          <mat-select [(value)]="selectedStazioneForestale" matInput #input class="form-control" [formControl]="stazForestaliSelezionate"
+                      placeholder="Stazione Forestale" name="stazioneForestale" required multiple>
+            <mat-select-trigger>
+              {{stazForestaliSelezionate.value && stazForestaliSelezionate.value[0] ? stazForestaliSelezionate.value[0].descrIT : ''}}
+              <span *ngIf="stazForestaliSelezionate.value?.length > 1" class="example-additional-selection">
+                (+{{stazForestaliSelezionate.value.length - 1}} {{stazForestaliSelezionate.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option (onSelectionChange)="updateDynamicCuaa($event)" placeholder="Nome Stazione Forestale"
+              required *ngFor="let stazioneForestale of stazioniForestali" [value]="stazioneForestale"> {{stazioneForestale.descrIT}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+    <!---->
+      <div class="form">
+        <mat-form-field color="accent" fxFlex>
+          <mat-select [(value)]="selectedAzienda" matInput #input class="form-control" [formControl]="aziendeSelezionate"
+                    placeholder="Azienda" name="azienda" required multiple>
+            <mat-select-trigger>
+            {{aziendeSelezionate.value && aziendeSelezionate.value[0] ? aziendeSelezionate.value[0].cuaa: ''}}
+            <span *ngIf="aziendeSelezionate.value?.length > 1" class="example-additional-selection">
+              (+{{aziendeSelezionate.value.length - 1}} {{aziendeSelezionate.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+            </mat-select-trigger>
+            <mat-option (onSelectionChange)="todoXXX($event)" placeholder="Nome Azienda"
+              required *ngFor="let item of azStazForFiltered" [value]="azienda"> {{item.azienda.cuaa}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </form>
+
+</div>

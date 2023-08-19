@@ -1,0 +1,48 @@
+package it.bz.prov.controlli.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the AZIENDA database table.
+ * */
+ 
+@Entity
+@Table(name="AZIENDA")
+@NamedQuery(name="Azienda.findAll", query="SELECT a FROM Azienda a")
+public class Azienda implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(unique=true, nullable=false, length=16)
+	private String cuaa;
+
+	@Column(length=50)
+	private String descrizione;
+
+	public Azienda() {
+	}
+
+	public String getCuaa() {
+		return this.cuaa;
+	}
+
+	public void setCuaa(String cuaa) {
+		this.cuaa = cuaa;
+	}
+
+	public String getDescrizione() {
+		return this.descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+}

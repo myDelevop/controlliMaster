@@ -1,0 +1,74 @@
+<!--<div class="mat-elevation-z24" style="margin: 50px;">-->
+
+  <div class="filter">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput (keyup)="applyFilter($event.target.value)" #filter placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="anno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Anno </th>
+      <td mat-cell *matCellDef="let element"> {{ element.anno }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="campagna">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Campagna </th>
+      <td mat-cell *matCellDef="let element"> {{ element.campagna }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="misura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Misura </th>
+      <td mat-cell *matCellDef="let element"> {{ element.misura }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="intervento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Intervento </th>
+      <td mat-cell *matCellDef="let element"> {{ element.intervento }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sottoIntervento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sotto Intervento </th>
+      <td mat-cell *matCellDef="let element"> {{ element.sottoIntervento }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoCampione">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Campione </th>
+      <td mat-cell *matCellDef="let element"> {{ element.tipoCampione }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoControllo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Controllo </th>
+      <td mat-cell *matCellDef="let element"> {{ element.tipoControllo }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="idChecklistTemplate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Checklist Template</th>
+      <td mat-cell *matCellDef="let element"> {{ nameChecklistTemplateFromId(element.idChecklistTemplate) }} </td>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="actions">
+      <th class="add-item-th" mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addChecklistRegola()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="updateChecklistRegola(row)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="deleteChecklistRegola(row)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+
+<!-- </div> -->
